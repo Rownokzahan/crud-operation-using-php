@@ -1,6 +1,17 @@
 <?php
   include 'connect.php';
   $id = $_GET['updateid'];
+
+  //selecting data associated with this particular id
+  $result = mysqli_query($con, "select * from crud where id=$id");
+
+  while($res = mysqli_fetch_array($result))
+  {
+    $name = $res['name'];
+    $email = $res['email'];
+    $mobile = $res['mobile'];
+  }
+
   if(isset($_POST['submit'])){
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -32,15 +43,15 @@
             <form action="" method="post">
                 <div class="mb-3">
                     <label class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter Your Name Here...">
+                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" placeholder="Enter Your Name Here...">
                   </div>
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" class="form-control" name="email" placeholder="Enter Your Email Here...">
+                  <label for="exampleInputEmail1" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" value="<?php echo $email;?>" placeholder="Enter Your Email Here...">
                 </div>    
                 <div class="mb-3">
                   <label class="form-label">Mobile</label>
-                  <input type="text" class="form-control" name="mobile" placeholder="Enter your mobile number...">
+                  <input type="text" class="form-control" name="mobile" value="<?php echo $mobile; ?>" placeholder="Enter your mobile number...">
                 </div>
                 <div class="pb-4">
                     <button type="submit" name="submit" class="btn btn-primary d-flex mx-auto">Update</button>
